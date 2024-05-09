@@ -12,12 +12,14 @@ import CircleRating from "../../../components/circleRating/CircleRating";
 import Img from "../../../components/lazyLoadImage/Img.jsx";
 import PosterFallback from "../../../assets/no-poster.png";
 import Genres from "../../../components/generes/Genres.jsx";
+import { PlayIcon } from "../Playbtn.jsx";
 
 const DetailsBanner = ({ video, crew }) => {
 
     const {mediaType , id} = useParams()
     const {data , loading}= useFetch(`/${mediaType}/${id}`);
     const {url} = useSelector((state) => state.home);
+    const _genres = data?.genres?.map((g) => g.id);
 
     const toHoursAndMinutes = (totalMinutes) => {
         const hours = Math.floor(totalMinutes / 60);
@@ -68,8 +70,30 @@ return (
                                         <div className="subtitle">
                                             {data.tagline}
                                         </div>
+                                        <Genres data={_genres} />
+                                        <CircleRating rating={data?.vote_average.toFixed(1)} />
+                                        <div className="playbtn">
+                                        <PlayIcon />
+                                        <span className="text">
+                                                    Watch Trailer
+                                                </span>
+                                        </div>
+
+                                        <div className="overview">
+                                            <div className="heading">
+                                                Overview
+                                            </div>
+                                            <div className="description">
+                                                {data?.overview}
+                                            </div>
+                                        </div>
+
+                                        
+
+
                                         </div>
                                         </div>
+                                       
                                         </ContentWrapper>
 
                     </>
