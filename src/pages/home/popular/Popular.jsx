@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
+import Carousel from "../../../components/carousel/Carousel";
 import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
 import SwitchTabs from "../../../components/switchTabs/SwitchTabs";
-import useFetch from "../../../hooks/useFetch";
 
-import Carousel from "../../../components/carousel/Carousel.jsx";
+import useFetch from "../../../hooks/useFetch";
 
 const Popular = () => {
     const [endpoint, setEndpoint] = useState("movie");
@@ -19,9 +19,17 @@ const Popular = () => {
         <div className="carouselSection">
             <ContentWrapper>
                 <span className="carouselTitle">Popular</span>
-                <SwitchTabs data={["Movies", "Shows"]} onTabChange={onTabChange} />
+                <SwitchTabs
+                    data={["Movies", "TV Shows"]}
+                    onTabChange={onTabChange}
+                />
             </ContentWrapper>
-            <Carousel data={data?.results} loading={loading} />
+            <Carousel
+                data={data?.results}
+                loading={loading}
+                endpoint={endpoint}
+                media_type={endpoint}
+            />
         </div>
     );
 };
